@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>康柏陪诊 · 医疗陪诊预约与检查陪同交接平台</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">＋</span>
+    <span class="brand-name">康柏陪诊</span>
+    <span class="brand-sub">检查陪同交接平台 <em>演示环境 · 数据均为模拟</em></span>
+  </div>
+  <div class="role-switch" id="roleSwitch">
+    <label>视角
+      <select id="roleSelect">
+        <option value="dispatch">调度台</option>
+        <option value="escort">陪诊员（移动端）</option>
+        <option value="patient">患者端</option>
+      </select>
+    </label>
+    <label id="escortWrap" class="hidden">陪诊员
+      <select id="escortSelect"></select>
+    </label>
+    <label id="patientWrap" class="hidden">患者
+      <select id="patientSelect"></select>
+    </label>
+    <button class="btn btn-ghost" id="refreshBtn">刷新</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidenav" id="sidenav">
+    <button class="nav-item active" data-view="calendar"><span>📅</span>预约日历</button>
+    <button class="nav-item" data-view="tasks"><span>🧑‍⚕️</span>陪诊任务</button>
+    <button class="nav-item" data-view="timeline"><span>⏱️</span>检查时间线</button>
+    <button class="nav-item" data-view="consents"><span>🔐</span>授权事项</button>
+    <button class="nav-item" data-view="handoffs"><span>🤝</span>交接记录</button>
+    <button class="nav-item" data-view="reviews"><span>⭐</span>评价汇总</button>
+  </nav>
+
+  <main class="content">
+    <!-- 陪诊员移动首屏：当前地点 / 下一步 / 签到 -->
+    <section id="escortHome" class="escort-home hidden"></section>
+
+    <section class="view" data-view="calendar">
+      <div class="view-head"><h2>预约日历</h2><div class="hint" id="calMonth"></div></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="day-detail">
+        <h3 id="calDayTitle">当日预约</h3>
+        <div id="calDayList" class="card-list"></div>
+      </div>
+    </section>
+
+    <section class="view hidden" data-view="tasks">
+      <div class="view-head">
+        <h2>陪诊任务</h2>
+        <div class="filters">
+          <select id="taskStatusFilter"></select>
+          <button class="btn btn-amber" id="newApptBtn" data-dispatch-only>+ 新建预约</button>
+        </div>
+      </div>
+      <div id="taskList" class="card-list"></div>
+    </section>
+
+    <section class="view hidden" data-view="timeline">
+      <div class="view-head"><h2>检查时间线</h2>
+        <select id="timelinePicker" class="wide"></select></div>
+      <div id="timelinePanel"></div>
+    </section>
+
+    <section class="view hidden" data-view="consents">
+      <div class="view-head"><h2>授权事项</h2></div>
+      <div id="consentPanels"></div>
+      <div class="view-head" style="margin-top:18px"><h3>越权操作 · 人工确认队列</h3>
+        <button class="btn btn-ghost" id="retryNotifyBtn">重发失败通知</button></div>
+      <div id="escalationList" class="card-list"></div>
+    </section>
+
+    <section class="view hidden" data-view="handoffs">
+      <div class="view-head"><h2>交接记录</h2>
+        <select id="handoffPicker" class="wide"></select></div>
+      <div id="handoffPanel"></div>
+    </section>
+
+    <section class="view hidden" data-view="reviews">
+      <div class="view-head"><h2>评价汇总</h2></div>
+      <div id="reviewPanel"></div>
+    </section>
+  </main>
+</div>
+
+<!-- 预约详情抽屉 -->
+<div id="drawerMask" class="drawer-mask hidden"></div>
+<aside id="drawer" class="drawer hidden"></aside>
+
+<!-- 新建预约弹窗 -->
+<div id="modalMask" class="modal-mask hidden">
+  <div class="modal" id="modal"></div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
