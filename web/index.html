@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>墨蓝陪诊 · 检查陪同交接平台（演示）</title>
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <div>
+      <h1>墨蓝陪诊</h1>
+      <p>检查陪同与交接平台 <em>· 演示数据，非真实患者信息</em></p>
+    </div>
+  </div>
+  <div class="role-switch" id="roleSwitch">
+    <button data-role="coordinator" class="active">协调员</button>
+    <button data-role="escort">陪诊员端</button>
+    <button data-role="patient">患者端</button>
+    <select id="escortSelect" class="hidden" title="切换陪诊员"></select>
+    <select id="patientSelect" class="hidden" title="切换患者"></select>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="calendar" class="active">预约日历</button>
+  <button data-tab="tasks">陪诊任务</button>
+  <button data-tab="timeline">检查时间线</button>
+  <button data-tab="authz">授权事项</button>
+  <button data-tab="handoffs">交接记录</button>
+  <button data-tab="reviews">评价汇总</button>
+</nav>
+
+<main>
+  <!-- 陪诊员移动端首屏卡片：当前地点 / 下一步 / 签到 -->
+  <section id="tab-tasks" class="tab-panel hidden">
+    <div class="escort-mobile" id="escortMobileCard"></div>
+    <div class="section-head">
+      <h2>陪诊任务</h2>
+      <div class="filters">
+        <select id="taskStatusFilter">
+          <option value="">全部状态</option>
+          <option value="open">待接单</option>
+          <option value="assigned">进行中</option>
+          <option value="completed">已完成</option>
+          <option value="cancelled">已取消</option>
+          <option value="refused">已拒绝陪同</option>
+        </select>
+      </div>
+    </div>
+    <div id="taskList" class="card-grid"></div>
+  </section>
+
+  <section id="tab-calendar" class="tab-panel">
+    <div class="section-head">
+      <h2>预约日历</h2>
+      <input type="month" id="calendarMonth">
+    </div>
+    <div id="calendarGrid" class="calendar-grid"></div>
+    <h3 class="subhead" id="calDayTitle">全部预约</h3>
+    <div id="calendarDayList" class="card-grid"></div>
+  </section>
+
+  <section id="tab-timeline" class="tab-panel hidden">
+    <div class="section-head">
+      <h2>检查时间线</h2>
+      <select id="timelineApptSelect"></select>
+    </div>
+    <div id="timelineView"></div>
+  </section>
+
+  <section id="tab-authz" class="tab-panel hidden">
+    <div class="section-head"><h2>授权事项</h2><select id="authzApptSelect"></select></div>
+    <div id="authzView"></div>
+  </section>
+
+  <section id="tab-handoffs" class="tab-panel hidden">
+    <div class="section-head"><h2>交接记录</h2><select id="handoffApptSelect"></select></div>
+    <div id="handoffView"></div>
+  </section>
+
+  <section id="tab-reviews" class="tab-panel hidden">
+    <div class="section-head"><h2>评价汇总</h2></div>
+    <div id="reviewView"></div>
+  </section>
+</main>
+
+<!-- 预约详情抽屉 -->
+<div id="drawerMask" class="drawer-mask hidden"></div>
+<aside id="drawer" class="drawer hidden"></aside>
+
+<div id="toast" class="toast hidden"></div>
+<div id="manualBanner" class="manual-banner hidden"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
